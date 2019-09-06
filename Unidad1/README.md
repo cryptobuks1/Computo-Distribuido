@@ -18,3 +18,7 @@ Performance (latency and bandwidth).
 You are building only part of a system you trust in the cloud.
 Reliability
 Scalability
+
+**How to learn distributed systems?**
+
+How systems fail: Systems that use only one computer fail, so you need to build a system tolerant to these failures in such a way that using a well-built distributed system you can get to tolerate these failures.
