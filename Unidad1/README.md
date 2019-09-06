@@ -22,3 +22,22 @@ Scalability
 **How to learn distributed systems?**
 
 How systems fail: Systems that use only one computer fail, so you need to build a system tolerant to these failures in such a way that using a well-built distributed system you can get to tolerate these failures.
+
+**What could go wrong?**
+It is explained that it could go wrong in a distributed system.
+All of the following errors can occur in a distributed system but they are very rare to happen.
+
+-  Crash - Or Crash Loop
+- Server down
+- Query of death
+- Data corruption
+- Broken dependency
+- Two attack
+- Cascading failure
+- Data loss
+- Certificate Expires
+- Runaway automation
+- Natural Disaster
+- Time travel
+- Police raid
+- Very Important User data loss.
