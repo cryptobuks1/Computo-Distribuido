@@ -49,11 +49,11 @@ All of the following errors can occur in a distributed system but they are very 
 - Very Important User data loss.
 
 ## Video 5
-s
+
 **Different types of failures**
 
 Some of the different faults can be divided into the following two groups.
 Network failures and node failures, it is convenient to divide the failures into these two groups because you can hire network engineers and software engineers to solve these failures.
 
-##Network failures:
+- Network failures:
 There are a large number of ways in which the network can fail and lose large numbers of packets, you can have routing problems, network congestion and cause network collapse, there are countless things that can fail in the network, the number of failures can increase if you have a very large distributed system that connects in several countries,
