@@ -1,13 +1,15 @@
-DOCUMENTATION VIDEOS
+**DOCUMENTATION VIDEOS**
 
-FIRST VIDEO:
-What is a distributed system?
+## Video 1
+
+**What is a distributed system?**
 A system that is divided into several computers in such a way that it is not a centralized system, since its processes run on different computers.
 example: save a file to your computer, if it fails your file will be lost unless the hard drive is not damaged and can be recovered in some way.
 In a distributed system your document would be stored in the cloud, so that if your computer will stop serving, you will still have access to your files from any other computer.
 
-SECOND VIDEO:
-Why build a distributed system?
+## Video 2
+
+**Why build a distributed system?**
 Your job manager asked you: it's a duty you have at work.
 You think it is fun to learn to create one: you feel interest in learning something new.
 You need a server: you also need a server for the system
@@ -19,9 +21,13 @@ You are building only part of a system you trust in the cloud.
 Reliability
 Scalability
 
+## Video 3
+
 **How to learn distributed systems?**
 
 How systems fail: Systems that use only one computer fail, so you need to build a system tolerant to these failures in such a way that using a well-built distributed system you can get to tolerate these failures.
+
+## Video 4
 
 **What could go wrong?**
 It is explained that it could go wrong in a distributed system.
@@ -42,6 +48,8 @@ All of the following errors can occur in a distributed system but they are very 
 - Police raid
 - Very Important User data loss.
 
+## Video 5
+s
 **Different types of failures**
 
 Some of the different faults can be divided into the following two groups.
