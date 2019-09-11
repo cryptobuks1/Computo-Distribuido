@@ -62,3 +62,8 @@ There are a large number of ways in which the network can fail and lose large nu
 The network consists of interconnected nodes which communicate with each other if some of the nodes fail can lose communication with other nodes and affect the entire network, due to partitions in the nodes.
 
 --A distributed system minimizes the failure of network falls, separating the connection into several groups of nodes in which if any failure can be connected to other nodes of the group or to another group while trying to recover the defective node.
+
+##  Video 6
+**Tolerance to Byzantine faults**
+The system must be built in such a way that it will tolerate failures, to provide security in the data that is handled, that when someone tries to do something malicious inside the system, they will realize what happened.
+Within this type of common failures in this type of systems we find the failures in some node in such a way that you have to look for the way that does not affect the communication between the other nodes
