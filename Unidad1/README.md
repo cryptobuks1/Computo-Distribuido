@@ -65,5 +65,6 @@ The network consists of interconnected nodes which communicate with each other i
 
 ##  Video 6
 **Tolerance to Byzantine faults**
+
 The system must be built in such a way that it will tolerate failures, to provide security in the data that is handled, that when someone tries to do something malicious inside the system, they will realize what happened.
 Within this type of common failures in this type of systems we find the failures in some node in such a way that you have to look for the way that does not affect the communication between the other nodes
