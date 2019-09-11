@@ -68,3 +68,21 @@ The network consists of interconnected nodes which communicate with each other i
 
 The system must be built in such a way that it will tolerate failures, to provide security in the data that is handled, that when someone tries to do something malicious inside the system, they will realize what happened.
 Within this type of common failures in this type of systems we find the failures in some node in such a way that you have to look for the way that does not affect the communication between the other nodes
+
+## Video 7
+
+**SLIs SLOs and SLAs**
+
+These systems are used to measure the performance and reliability of your distributed system, if you do not measure the performance of your distributed system in future updates you will not know how to improve it and therefore end up improving unnecessary parts of the system so it is advisable to analyze its performance, functionality and reliability.
+
+SLI: It is a service level indicator thanks to this we can measure for example if the user is having an excellent service based on the objectives of our system, we can also measure how long it takes a response from our system to the user.
+
+SLO: It is a service level objective, how well we want to improve the service level, it is used to set objectives at the service level.
+Example; 99% of the times a user requests a service to the system we want the response to be less than 500 milliseconds.
+
+SLA: An SLA (Service Level Agreement) is an SLO + Consequences, what would happen if we lost our objective, how it would affect the user, the system should work as described, if you do not comply with the SLO you could pay all the problems that arise for the user based on the objective defined in the system
+
+Why study SLIs, SLOs, SLAs?
+The first point is because if we can measure it, it can be improved and if you do not measure it is really difficult to improve, we will not know if we are improving, in second if you do not know what part of the system to improve then you could be wasting your time in improving parts of the system that they don't improve at all, or you could end up making a more robust system than is needed.
+
+To make use of the correct implementation of SLA, it is necessary to have personnel in charge of monitoring the possible failures of different suppliers to solve them as quickly and effectively, which requires a lot of investment to obtain a high level of reliability.
