@@ -86,3 +86,7 @@ Why study SLIs, SLOs, SLAs?
 The first point is because if we can measure it, it can be improved and if you do not measure it is really difficult to improve, we will not know if we are improving, in second if you do not know what part of the system to improve then you could be wasting your time in improving parts of the system that they don't improve at all, or you could end up making a more robust system than is needed.
 
 To make use of the correct implementation of SLA, it is necessary to have personnel in charge of monitoring the possible failures of different suppliers to solve them as quickly and effectively, which requires a lot of investment to obtain a high level of reliability.
+
+The service of the suppliers is not 100% reliable so that if an incident occurs they will ignore it and will pretend that nothing happens in their SLA, so that when monitoring it is possible to have a plan regarding failures.
+
+Establishing an SLO implies that you know what you really want and it involves estimating the construction time of the software that you are going to do, so that when implementing it there are no errors. This way your SLA will be less complicated to solve.
