@@ -90,3 +90,18 @@ To make use of the correct implementation of SLA, it is necessary to have person
 The service of the suppliers is not 100% reliable so that if an incident occurs they will ignore it and will pretend that nothing happens in their SLA, so that when monitoring it is possible to have a plan regarding failures.
 
 Establishing an SLO implies that you know what you really want and it involves estimating the construction time of the software that you are going to do, so that when implementing it there are no errors. This way your SLA will be less complicated to solve.
+
+## Video 8
+
+**Class Project: Distributed Chat**
+
+It presents a project that consists of a chat, so that if you use it at the same time as another person on the same server, you can see the messages he sends, these messages are saved and you can search with keywords in the search engine of the chat and related messages will appear.
+
+How does it work?
+The infrastructure of the engine and the Google application do a lot of work, the pieces that really had to be created are: an application that runs on users, contains HTML and JavaScript that periodically consults the App Engine infrastructure and asks if there are messages new, and if so, retrieves them and rewrites the HTML to include the messages of that part. The complicated part is the Python application, which is what makes all the server-side logic run and is executed by the Google App Engine infrastructure, this means that when a user requests to send or receive chat messages, he distributes those messages to the user, the messages themselves are stored in the database of the App Engine data store.
+
+Why is this system so good?
+First of all, the data warehouse database is highly reliable for our messages, replicates on several hard drives and many machines and has fault tolerance. On the other hand the code is executed in a scalable and fault-tolerant manner of the application, the engine infrastructure works by making copies on multiple machines, rotates more copies if the server load demands it.
+The infrastructure also provides a channel termination mechanism that allows each browser to open the connection back to App Engine and receive chat messages as they enter.
+
+Google provides us with several tools that make the job easier, but there is a disadvantage to the cost of App Engine. In this way we have a distributed system, but Google did a lot of work, so if you want to see how a system of this type works and learn, we must build it ourselves.
