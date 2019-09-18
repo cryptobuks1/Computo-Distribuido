@@ -145,3 +145,15 @@ One thing that can be done is to measure the pulsations by the time, that is to 
 Time is hard
 To be able to compare the previous point, we should assume that our clocks are paired by milliseconds and that means that our two clocks (those of the keystrokes and the one of the snapshot) must be quite precise this means that we should configure ntp to avoid jumps in the time and to adjust the time automatically or to try to solve synchronization errors.
 The synchronization of the clocks is very complicated since the ntp works sending packages in network so the time that it takes of round trip can be prolonged by failures in the network or other common problems. So a simpler way would be to eliminate the clock and only assign numbers to the pulsations in this way if a signal of 9 pressed keys is received, they could be compared with those of another player and thus be able to predict the movement of the players.
+
+## Video 11
+
+**Introduction to the Blockchain consensus**
+
+Let's see how the blockchain works to solve problems, Bitcoin blockchain consensus algorithms and compare it with other consensus algorithms such as Paxos
+
+## Video 12
+
+**What is blockchain?**
+
+It is a fairly simple blockchain, suppose you have a lot of data and want to form a blockchain out of that, we will take a block of data and when we receive more data we will form a second block and in the header of it we will put the hash of the first, this hash will have to be a cryptographic hash that means that it has two important properties, one is the first one is quite easy which means that we can validate the first block at any time by recalculating its hash and comparing its hash with which
