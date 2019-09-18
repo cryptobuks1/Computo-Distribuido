@@ -120,3 +120,11 @@ Paxos
 Database Replication
 How does Paxos work?
 Suppose we have 3 computers and one of these fails, it will no longer participate in sending messages to the other computers until it is well again, for this it is necessary that you have a memory so that when you join the cluster again, remember where It was that he stayed. It is necessary that the system is adequate to tolerate this type of failure.
+
+What can go wrong?
+
+if a proponent fails, the others continue working normally because each of the phases only awaits the response of some of their peers and not of all,
+
+Another thing that can happen is that if a proponent fails to complete the phase, another proponent will take over once they realize that there is no one progressing anywhere, the protocol will end and it will only do so.
+
+The third case of failure is a proponent that could fail to accept the phase, there are actually two cases to consider. The first case is that the proponent who takes the part above does not realize that the first ever existed and did not receives promising responses, which contains data from a previous one, then it simply runs normally and ends the protocol
