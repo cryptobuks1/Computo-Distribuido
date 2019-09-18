@@ -93,11 +93,11 @@ Establishing an SLO implies that you know what you really want and it involves e
 
 ## Video 8
 
-**Class Project: Distributed Chat**
+*Class Project: Distributed Chat*
 
 It presents a project that consists of a chat, so that if you use it at the same time as another person on the same server, you can see the messages he sends, these messages are saved and you can search with keywords in the search engine of the chat and related messages will appear.
 
-How does it work?
+**How does it work?**
 The infrastructure of the engine and the Google application do a lot of work, the pieces that really had to be created are: an application that runs on users, contains HTML and JavaScript that periodically consults the App Engine infrastructure and asks if there are messages new, and if so, retrieves them and rewrites the HTML to include the messages of that part. The complicated part is the Python application, which is what makes all the server-side logic run and is executed by the Google App Engine infrastructure, this means that when a user requests to send or receive chat messages, he distributes those messages to the user, the messages themselves are stored in the database of the App Engine data store.
 
 Why is this system so good?
@@ -121,7 +121,7 @@ Database Replication
 How does Paxos work?
 Suppose we have 3 computers and one of these fails, it will no longer participate in sending messages to the other computers until it is well again, for this it is necessary that you have a memory so that when you join the cluster again, remember where It was that he stayed. It is necessary that the system is adequate to tolerate this type of failure.
 
-What can go wrong?
+**What can go wrong?**
 
 if a proponent fails, the others continue working normally because each of the phases only awaits the response of some of their peers and not of all,
 
@@ -136,7 +136,7 @@ The third case of failure is a proponent that could fail to accept the phase, th
 Start with a very simple model Client-Server model each player sits on a computer and that computer records the keystrokes and movements of the player's mouse and sends as a series of keystrokes to a server where the engine of the engine runs game, where it takes all the keystrokes of all the players and simulates the next step in time for the next tic of the game, in this way calculates where the players are now and who shot who and any relevant information, and sends that information back to customers as an instant consequence of the client, in this way the screens are updated to show what happened in the game. It is quite simple as well as the real-time strategy, but this type of system is bad, the information has to be sent to the server and receive the response, but what happens if it is very far from the server, this causes the LAG, this type of systems worked well with the classic games since it was played from a local server, but now the games have become international competitions so that the systems must have a network delay tolerance of up to 200 milliseconds round trip, That is a long time if you are waiting to take the next step.
 A more effective way would be through speculation, so that a local server stores the player's keystrokes and compares them to the server on which the game is run, if they are correct, it changes the player's screen to the next step, it is something that often used in distributed systems to improve game performance. But the game is still not perfect, since there is a delay for example if on your screen you are moving and you shoot the other player in which the signal is sent and the response returns, the other player may have moved on his screen and you will not hit the target, you would have to guess where his other movement would be, he would have to have a delay compensation to calculate the movement.
 
-Predict the future?
+**Predict the future?**
 
 There are many ways to predict future movements although an important one would be that an AI (artificial intelligence) will take care of that, one of the big problems is the latency of the players since communication goes through the process of going to the server and of back to the players, and if the middleman was eliminated? (the server) this would reduce the lag by half but it generates other problems since it would be easier for hackers to hack their game version.
 There are several factors that must be taken into account when pressing the keys to be able to predict the movement of the players, one of them is that if the pulsation is fresh, this is what we mean if that press is useful or not to detect the position of the player.
