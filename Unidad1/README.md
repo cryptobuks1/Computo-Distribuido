@@ -105,3 +105,18 @@ First of all, the data warehouse database is highly reliable for our messages, r
 The infrastructure also provides a channel termination mechanism that allows each browser to open the connection back to App Engine and receive chat messages as they enter.
 
 Google provides us with several tools that make the job easier, but there is a disadvantage to the cost of App Engine. In this way we have a distributed system, but Google did a lot of work, so if you want to see how a system of this type works and learn, we must build it ourselves.
+
+## Video 9
+
+**Paxos Simplified**
+
+
+Paxos is a complicated study topic, so a fairly simple example would be to eat in a group, make the decision of what to eat, if some want pizza or hamburgers we must have a solution for this problem, in the same way it happens in a system you have to prevent this type of failures if you have a product sale and two of your computers fail there is no problem if one is still working.
+To solve this type of problem, the paxos algorithm is used, with this you can build a multipax that is a record that helps you solve your problems through records of what you do.
+In the 1980s Leslie Lamport came up with Paxos and although he saw that he had successfully built a reliable distributed system he did not have a mathematical proof that his system was good.
+If you want to build a distributed system there are three options:
+Byzantine fault tolerant
+Paxos
+Database Replication
+How does Paxos work?
+Suppose we have 3 computers and one of these fails, it will no longer participate in sending messages to the other computers until it is well again, for this it is necessary that you have a memory so that when you join the cluster again, remember where It was that he stayed. It is necessary that the system is adequate to tolerate this type of failure.
