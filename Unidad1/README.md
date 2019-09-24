@@ -160,3 +160,42 @@ It is a fairly simple blockchain, suppose you have a lot of data and want to for
 
 Why do we use hash?
 because we use hashes instead of pointers to chain all this together, with this we can validate that everything is fine in the system by checking the hashes and that nobody has corrupted anything. This is how Bitcoin works but it is so large that it does not store its data in the blocks it loads them into a structure called Merkel tree, this is a binary tree where each node contains the hash of the two nodes below it and then only You iterate and have the hashes until you reach the sheets where you save your transaction data, in this way you can access only the data you need and verify that nothing has been corrupted.
+
+
+## Video 13
+**Bitcoin Blockchain Consensus**
+
+What is consensus?
+if we divide many computers between good computers and bad computers, good computers are waiting for each one to verify the information that the other contains through the blockchain, therefore it forms a consensus, to achieve a consensus between the computers is carried out through the paxos algorithm, in this way they can achieve that if a computer has failures it is left out of the system, therefore Bitcoin needs an algorithm that is resistant to the attackers that have accessed.
+To have a good bitcoin consensus, it works well when it generates a new block, that new block finally needs to be replicated to all the good nodes in the system, to have a good consensus what should happen is that when that new block wanted to leave the system or join again at any time
+
+Why is our system formed by livelock?
+The fundamental problem is that we can add blocks to a blockchain much faster than we can learn from other nodes by adding blocks
+
+
+
+## Video 14
+
+**Should you use the Bitcoin consensus?**
+Using the blockchain algorithm is better as it builds trust, between computers and users. A public blockchain is where computers and users can join and leave their bitcoin network at any time and if ordered so that it has to be used a rather complicated algorithm that involves having a large number of computers to obtain security guarantees for the system to succeed, on the other hand if you are trying to build a system that is really reliable with a paxos or rafts algorithm it becomes more sure that the blockchain algorithm, for example if we compare the performance of the classic algorithms with that of bitcoin, as a result we get that bitcoin is well below the others, on the other hand the complexity of using the bitcoin algorithm in comparison With paxos, the latency in this comparison similarly paxos is greater than bitcoin.
+
+## Video 15
+**Example of distribution system design (Unique ID)**
+
+The first is to find a way to create a global unique identifier so that every time a function stored in a distributed database generates an identifier that never repeats itself, and thus have transactions identified. To solve this problem you can use UUID or G UID and windows gives you a function that generates this.
+
+Thanks to this, a unique identifier can be generated, which is not really a big problem of distributed systems, because we have just distributed the calculation completely since it is executed independently on each computer and it is done, which is really good if everything you need is uniqueness, but what if you need an identification that can be used to resolve conflicts, in transactions, when two access data at the same time, what is basically required is a uniquely monotonously growing identification, what could be done is adjust a solution to use the time again instead of having the machine id first, we put the time first and then the machine id, this ensures the id time and makes sure the problem is unique This method is that it does not guarantee that it can work in 2 different times than the second machine, the reason is because to guarantee that you need that the computer clocks are perfectly synchronized and with this you could not generate the monotonously growing id.
+
+In order for it to work properly, it is necessary to have the IDs stored in a single location so that each transaction communicates in a single location, but in the same way it would be a centralized type system that would not fulfill the functions of a distributed system to solve this type of trouble
+
+## Video 16 
+**The CAP theorem**
+
+When you build a distributed system it is because you are trying to build something more reliable than a centralized system, but how reliable is it to build a system? The CAP theorem originally established by Eric Brewer formalizes some useful limits on reliability. CAP means consistency, availability and partition tolerance. The theorem talks about the trade-offs between consistency and availability that you have to do if your system always suffers partitions. For example, if you start with a startup of a bank and have ATMs and users admit three different operations: they can deposit, withdraw and check balance. For this you use a distributed system in such a way that each cashier has a copy of the account balance, but there may be problems such as a cashier not working or the network is failing, so you can not communicate with each other. This is what the CAP theorem talks about, the system has to make a choice: it can be consistent or available but not do both.
+
+When you design your system if there are never any partitions, it can make the system consistent and available, but if there is a partition you have to choose. between a
+consistent design or an available design.
+
+The CAP theorem is not so simple because in the world you can talk about degrees of consistency and degrees of availability and make compensations between those two. For example, when a partition occurs our ATMs accept deposits, but do not offer balance information or allow withdrawals, therefore it would only be partially available, and that would stop the bank balance, or we could also allow the user to make deposits also request information from balance, but when we inform you of the balance, mark it as tentative, we are not sure if this is really the right balance.
+
+In conclusion, depending on the network infrastructure, you should see how feasible it would be to implement either a degree of consistency or a degree of availability.
