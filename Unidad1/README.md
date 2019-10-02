@@ -7,6 +7,18 @@
 * [Contenido 2](#item2)
 * [Contenido 3](#item3)
 * [Contenido 4](#item4)
+* [Contenido 5](#item5)
+* [Contenido 6](#item6)
+* [Contenido 7](#item7)
+* [Contenido 8](#item8)
+* [Contenido 9](#item9)
+* [Contenido 10](#item10)
+* [Contenido 11](#item11)
+* [Contenido 12](#item12)
+* [Contenido 13](#item13)
+* [Contenido 14](#item14)
+* [Contenido 15](#item15)
+* [Contenido 16](#item16)
 
 <a name="item1"></a>
 ## Video 1
@@ -16,6 +28,7 @@ A system that is divided into several computers in such a way that it is not a c
 example: save a file to your computer, if it fails your file will be lost unless the hard drive is not damaged and can be recovered in some way.
 In a distributed system your document would be stored in the cloud, so that if your computer will stop serving, you will still have access to your files from any other computer.
 
+<a name="item2"></a>
 ## Video 2
 
 **Why build a distributed system?**
@@ -30,12 +43,14 @@ You are building only part of a system you trust in the cloud.
 Reliability
 Scalability
 
+<a name="item3"></a>
 ## Video 3
 
 **How to learn distributed systems?**
 
 How systems fail: Systems that use only one computer fail, so you need to build a system tolerant to these failures in such a way that using a well-built distributed system you can get to tolerate these failures.
 
+<a name="item4"></a>
 ## Video 4
 
 **What could go wrong?**
@@ -57,6 +72,7 @@ All of the following errors can occur in a distributed system but they are very 
 - Police raid
 - Very Important User data loss.
 
+<a name="item5"></a>
 ## Video 5
 
 **Different types of failures**
@@ -72,12 +88,14 @@ The network consists of interconnected nodes which communicate with each other i
 
 --A distributed system minimizes the failure of network falls, separating the connection into several groups of nodes in which if any failure can be connected to other nodes of the group or to another group while trying to recover the defective node.
 
+<a name="item6"></a>
 ##  Video 6
 **Tolerance to Byzantine faults**
 
 The system must be built in such a way that it will tolerate failures, to provide security in the data that is handled, that when someone tries to do something malicious inside the system, they will realize what happened.
 Within this type of common failures in this type of systems we find the failures in some node in such a way that you have to look for the way that does not affect the communication between the other nodes
 
+<a name="item7"></a>
 ## Video 7
 
 **SLIs SLOs and SLAs**
@@ -100,6 +118,7 @@ The service of the suppliers is not 100% reliable so that if an incident occurs 
 
 Establishing an SLO implies that you know what you really want and it involves estimating the construction time of the software that you are going to do, so that when implementing it there are no errors. This way your SLA will be less complicated to solve.
 
+<a name="item8"></a>
 ## Video 8
 
 *Class Project: Distributed Chat*
@@ -115,6 +134,7 @@ The infrastructure also provides a channel termination mechanism that allows eac
 
 Google provides us with several tools that make the job easier, but there is a disadvantage to the cost of App Engine. In this way we have a distributed system, but Google did a lot of work, so if you want to see how a system of this type works and learn, we must build it ourselves.
 
+<a name="item9"></a>
 ## Video 9
 
 **Paxos Simplified**
@@ -138,6 +158,7 @@ Another thing that can happen is that if a proponent fails to complete the phase
 
 The third case of failure is a proponent that could fail to accept the phase, there are actually two cases to consider. The first case is that the proponent who takes the part above does not realize that the first ever existed and did not receives promising responses, which contains data from a previous one, then it simply runs normally and ends the protocol
 
+<a name="item10"></a>
 ## Video 10
 
 **How does Counterstrike work?**
@@ -155,12 +176,14 @@ Time is hard
 To be able to compare the previous point, we should assume that our clocks are paired by milliseconds and that means that our two clocks (those of the keystrokes and the one of the snapshot) must be quite precise this means that we should configure ntp to avoid jumps in the time and to adjust the time automatically or to try to solve synchronization errors.
 The synchronization of the clocks is very complicated since the ntp works sending packages in network so the time that it takes of round trip can be prolonged by failures in the network or other common problems. So a simpler way would be to eliminate the clock and only assign numbers to the pulsations in this way if a signal of 9 pressed keys is received, they could be compared with those of another player and thus be able to predict the movement of the players.
 
+<a name="item11"></a>
 ## Video 11
 
 **Introduction to the Blockchain consensus**
 
 Let's see how the blockchain works to solve problems, Bitcoin blockchain consensus algorithms and compare it with other consensus algorithms such as Paxos
 
+<a name="item12"></a>
 ## Video 12
 
 **What is blockchain?**
@@ -171,6 +194,7 @@ Why do we use hash?
 because we use hashes instead of pointers to chain all this together, with this we can validate that everything is fine in the system by checking the hashes and that nobody has corrupted anything. This is how Bitcoin works but it is so large that it does not store its data in the blocks it loads them into a structure called Merkel tree, this is a binary tree where each node contains the hash of the two nodes below it and then only You iterate and have the hashes until you reach the sheets where you save your transaction data, in this way you can access only the data you need and verify that nothing has been corrupted.
 
 
+<a name="item13"></a>
 ## Video 13
 **Bitcoin Blockchain Consensus**
 
@@ -182,12 +206,13 @@ Why is our system formed by livelock?
 The fundamental problem is that we can add blocks to a blockchain much faster than we can learn from other nodes by adding blocks
 
 
-
+<a name="item14"></a>
 ## Video 14
 
 **Should you use the Bitcoin consensus?**
 Using the blockchain algorithm is better as it builds trust, between computers and users. A public blockchain is where computers and users can join and leave their bitcoin network at any time and if ordered so that it has to be used a rather complicated algorithm that involves having a large number of computers to obtain security guarantees for the system to succeed, on the other hand if you are trying to build a system that is really reliable with a paxos or rafts algorithm it becomes more sure that the blockchain algorithm, for example if we compare the performance of the classic algorithms with that of bitcoin, as a result we get that bitcoin is well below the others, on the other hand the complexity of using the bitcoin algorithm in comparison With paxos, the latency in this comparison similarly paxos is greater than bitcoin.
 
+<a name="item15"></a>
 ## Video 15
 **Example of distribution system design (Unique ID)**
 
@@ -197,6 +222,7 @@ Thanks to this, a unique identifier can be generated, which is not really a big 
 
 In order for it to work properly, it is necessary to have the IDs stored in a single location so that each transaction communicates in a single location, but in the same way it would be a centralized type system that would not fulfill the functions of a distributed system to solve this type of trouble
 
+<a name="item16"></a>
 ## Video 16
 **The CAP theorem**
 
