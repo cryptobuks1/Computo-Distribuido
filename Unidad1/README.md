@@ -2,7 +2,6 @@
 
 **INDEX**
 
-## Índice de contenidos
 * [Contenido 1](#item1)
 * [Contenido 2](#item2)
 * [Contenido 3](#item3)
