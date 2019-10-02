@@ -1,5 +1,9 @@
 **DOCUMENTATION VIDEOS**
 
+##INDEX
+
+[video1](## Video 1)
+
 ## Video 1
 
 **What is a distributed system?**
@@ -188,7 +192,7 @@ Thanks to this, a unique identifier can be generated, which is not really a big 
 
 In order for it to work properly, it is necessary to have the IDs stored in a single location so that each transaction communicates in a single location, but in the same way it would be a centralized type system that would not fulfill the functions of a distributed system to solve this type of trouble
 
-## Video 16 
+## Video 16
 **The CAP theorem**
 
 When you build a distributed system it is because you are trying to build something more reliable than a centralized system, but how reliable is it to build a system? The CAP theorem originally established by Eric Brewer formalizes some useful limits on reliability. CAP means consistency, availability and partition tolerance. The theorem talks about the trade-offs between consistency and availability that you have to do if your system always suffers partitions. For example, if you start with a startup of a bank and have ATMs and users admit three different operations: they can deposit, withdraw and check balance. For this you use a distributed system in such a way that each cashier has a copy of the account balance, but there may be problems such as a cashier not working or the network is failing, so you can not communicate with each other. This is what the CAP theorem talks about, the system has to make a choice: it can be consistent or available but not do both.
@@ -199,3 +203,8 @@ consistent design or an available design.
 The CAP theorem is not so simple because in the world you can talk about degrees of consistency and degrees of availability and make compensations between those two. For example, when a partition occurs our ATMs accept deposits, but do not offer balance information or allow withdrawals, therefore it would only be partially available, and that would stop the bank balance, or we could also allow the user to make deposits also request information from balance, but when we inform you of the balance, mark it as tentative, we are not sure if this is really the right balance.
 
 In conclusion, depending on the network infrastructure, you should see how feasible it would be to implement either a degree of consistency or a degree of availability.
+
+## Authors:
+
+**OROZCO TORO JOSE MANUEL**
+**GARCIA MERAZ LUIS ADRIAN**
