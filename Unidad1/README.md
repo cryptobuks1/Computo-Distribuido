@@ -2,22 +2,22 @@
 
 **INDEX**
 
-* [VIDEO 1](#item1)
-* [VIDEO 2](#item2)
-* [VIDEO 3](#item3)
-* [VIDEO 4](#item4)
-* [VIDEO 5](#item5)
-* [VIDEO 6](#item6)
-* [VIDEO 7](#item7)
-* [VIDEO 8](#item8)
-* [VIDEO 9](#item9)
-* [VIDEO 10](#item10)
-* [VIDEO 11](#item11)
-* [VIDEO 12](#item12)
-* [VIDEO 13](#item13)
-* [VIDEO 14](#item14)
-* [VIDEO 15](#item15)
-* [VIDEO 16](#item16)
+* [What is a distributed system?](#item1)
+* [Why build a distributed system?](#item2)
+* [How to learn distributed systems?](#item3)
+* [What could go wrong?](#item4)
+* [Different types of failures](#item5)
+* [Tolerance to Byzantine faults](#item6)
+* [SLIs SLOs and SLAs](#item7)
+* [Class Project: Distributed Chat](#item8)
+* [Paxos Simplified](#item9)
+* [How does Counterstrike work?](#item10)
+* [Introduction to the Blockchain consensus](#item11)
+* [What is blockchain?](#item12)
+* [Bitcoin Blockchain Consensus](#item13)
+* [Should you use the Bitcoin consensus?](#item14)
+* [Example of distribution system design (Unique ID)DEO 15](#item15)
+* [The CAP theorem](#item16)
 
 <a name="item1"></a>
 ## Video 1
