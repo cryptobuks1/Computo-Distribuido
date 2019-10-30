@@ -1,4 +1,4 @@
-**An Introduction to Asynchronous Programming in Python **
+**AN INTRODUCTION TO ASYNCHRONOUS PROGRAMMING IN PYTHON**
 
 **INDEX**
 
