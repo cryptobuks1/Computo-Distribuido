@@ -19,18 +19,22 @@ Asynchronous programming gives us the ability to "defer" the execution of a func
 The way in which multiprocesses work is to execute the same script several times, after this the scripts can be executed individually or together, the operating system is responsible for distributing the resources of the PC in all instances.
 Multiple processes or multiple threads can be executed within a single process.
 Additionally, the multiprocessing library can be used in which it supports generation processes as in the following example.
+
 Example:
 
-from multiprocessing import Process """Import the process library of the multiprocessing package.
+from multiprocessing import Process
+ """Import the process library of the multiprocessing package.
 The multiprocessing package supports generation processes offering local concurrency
 and remote."""
 
 
-def print_func(continent='Asia'): # The print_func function is created by sending as parameter the variable continent equal to "ASIA".
+def print_func(continent='Asia'):
+# The print_func function is created by sending as parameter the variable continent equal to "ASIA".
     print('The name of continent is : ', continent)# Print the continent variable of the function
 
 
-if __name__ == "__main__":  # confirms that the code is under main function # Therefore the code below makes it our main program to run it without problems
+if __name__ == "__main__":  
+# confirms that the code is under main function # Therefore the code below makes it our main program to run it without problems
 
     names = ['America', 'Europe', 'Africa']
     procs = []
