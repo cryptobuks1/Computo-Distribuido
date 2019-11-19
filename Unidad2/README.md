@@ -23,18 +23,18 @@ Additionally, the multiprocessing library can be used in which it supports gener
 Example:
 
 from multiprocessing import Process
- """Import the process library of the multiprocessing package.
+  """Import the process library of the multiprocessing package.
 The multiprocessing package supports generation processes offering local concurrency
 and remote."""
 
 
 def print_func(continent='Asia'):
-# The print_func function is created by sending as parameter the variable continent equal to "ASIA".
+  # The print_func function is created by sending as parameter the variable continent equal to "ASIA".
     print('The name of continent is : ', continent)# Print the continent variable of the function
 
 
 if __name__ == "__main__":  
-# confirms that the code is under main function # Therefore the code below makes it our main program to run it without problems
+  # confirms that the code is under main function # Therefore the code below makes it our main program to run it without problems
 
     names = ['America', 'Europe', 'Africa']
     procs = []
@@ -60,17 +60,19 @@ if __name__ == "__main__":
 One way to execute several things at once is to use threads in this way multiple tasks are executed.
 Here is an example of how this type of programming works in python:
 
-"" "A python library is imported here that allows you to perform
-multiprocesses using threads "" "
+  "" "A python library is imported here that allows you to perform
+  multiprocesses using threads "" "
 import threading
 
-def print_cube(num):#define the function print_cube that takes as argument the variable num
+def print_cube(num):
+  #define the function print_cube that takes as argument the variable num
     """
     function to print cube of given num
     """
     print("Cube: {}".format(num * num * num))
 
-def print_square(num):#define the square square function that takes as argument the variable num
+def print_square(num):
+  #define the square square function that takes as argument the variable num
     """
     function to print square of given num
     """
