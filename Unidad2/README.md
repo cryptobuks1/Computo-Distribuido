@@ -23,22 +23,23 @@ Additionally, the multiprocessing library can be used in which it supports gener
 Example:
 
 from multiprocessing import Process
-  """Import the process library of the multiprocessing package.
-The multiprocessing package supports generation processes offering local concurrency
-and remote."""
+  #Import the process library of the multiprocessing package.
+  # The multiprocessing package supports generation processes offering local concurrency
+  # and remote.
 
 
-def print_func(continent='Asia'):
-  # The print_func function is created by sending as parameter the variable continent equal to "ASIA".
-    print('The name of continent is : ', continent)# Print the continent variable of the function
+def print_func(continent='Asia'): # The print_func function is created by sending as parameter the variable continent equal to "ASIA".
+    print('The name of continent is : ', continent) # Print the continent variable of the function
 
 
-if __name__ == "__main__":  
-  # confirms that the code is under main function # Therefore the code below makes it our main program to run it without problems
-
+if __name__ == "__main__":  # confirms that the code is under main function
+    """With this code we see if the module has been imported or not.
+    If it has not been imported (it has been run as the main program)
+    Run the code inside the conditional."""
+    # Therefore the code below makes it our main program to run it without problems
     names = ['America', 'Europe', 'Africa']
     procs = []
-    proc = Process(target=print_func)  # instantiating without any argument  # the array is initialized without any arguments
+    proc = Process(target=print_func)  # instantiating without any argument
     procs.append(proc)
     proc.start()
 
@@ -49,8 +50,9 @@ if __name__ == "__main__":
         procs.append(proc)
         proc.start()
 
-        # The processes are completed by joining the 2 arrangements with our main function
+    # The processes are completed by joining the 2 arrangements with our main function
     # Obtaining the name of content is: "the name of the continent declared in the arrangement depending on the position"
+    # complete the processes
     for proc in procs:
         proc.join()
 
