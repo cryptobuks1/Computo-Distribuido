@@ -4,6 +4,8 @@
 
 * [1.-Introduction to asynchronous programming in python](#item1)
 * [1.1.-Multiple Processes](#item2)
+* [1.2.-Multiple threads](#item3)
+
 
 <a name="item1"></a>
 ## TOPIC 1
@@ -50,4 +52,47 @@ if __name__ == "__main__":  # confirms that the code is under main function # Th
 
 <a name="item3"></a>
 ## TOPIC 3
-**1.1 Multiple Processes**
+**1.2 Multiple threads**
+One way to execute several things at once is to use threads in this way multiple tasks are executed.
+Here is an example of how this type of programming works in python:
+
+"" "A python library is imported here that allows you to perform
+multiprocesses using threads "" "
+import threading
+
+def print_cube(num):#define the function print_cube that takes as argument the variable num
+    """
+    function to print cube of given num
+    """
+    print("Cube: {}".format(num * num * num))
+
+def print_square(num):#define the square square function that takes as argument the variable num
+    """
+    function to print square of given num
+    """
+    print("Square: {}".format(num * num))
+
+if __name__ == "__main__":
+  # threads are created
+    "" "functions are accessed here through target, and
+    assign the value of the number 10 for the argument that these functions will take "" "
+
+    t1 = threading.Thread(target=print_square, args=(10,))
+    t2 = threading.Thread(target=print_cube, args=(10,))
+
+    # starting thread 1
+    t1.start()
+    # starting thread 2
+    t2.start()
+
+    # wait until thread 1 is completely executed
+    t1.join()
+    # wait until thread 2 is completely executed
+    t2.join()
+
+    # both threads completely executed
+    print("Done!")
+
+
+<a name="item3"></a>
+## TOPIC 4
