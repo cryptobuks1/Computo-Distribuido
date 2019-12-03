@@ -13,13 +13,13 @@
 
 
 <a name="item1"></a>
-## TOPIC 1
+
 
 **1.-Introduction to asynchronous programming in python.**
 Asynchronous programming gives us the ability to "defer" the execution of a function while waiting for an operation to be completed, usually I / O (network, hard disk, ...), and thus avoid blocking the execution until it has been completed. completed the task in question This is possible because the functions are first-class citizens and can be passed as arguments of other functions as we would with the variables.
 
 <a name="item2"></a>
-## TOPIC 2
+
 **1.1 Multiple Processes**
 The way in which multiprocesses work is to execute the same script several times, after this the scripts can be executed individually or together, the operating system is responsible for distributing the resources of the PC in all instances.
 Multiple processes or multiple threads can be executed within a single process.
@@ -62,7 +62,7 @@ if __name__ == "__main__":  # confirms that the code is under main function
         proc.join()
 
 <a name="item3"></a>
-## TOPIC 3
+
 **1.2 Multiple threads**
 One way to execute several things at once is to use threads in this way multiple tasks are executed.
 Here is an example of how this type of programming works in python:
@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
 
 <a name="item4"></a>
-## TOPIC 4
+
 **1.3 performance corutins**
 Corutins are generalizations of subroutines. They are used for cooperative multitasking where a process voluntarily yields (gives away) control periodically or when it is inactive to allow multiple applications to run simultaneously. Corutins are similar to generators but with few additional methods and a slight change in the way we use the declaration of performance. Generators produce data for iteration, while corutins can also consume data.
 Courutinas Code
@@ -132,7 +132,7 @@ corou.send ("Dear James")
 corou.close () # we finally close the courutina.
 
 <a name="item5"></a>
-## TOPIC 5
+
 **1.4 Asynchronous programming**
 In this form of programming the operating system does not participate. The way Python works in this way is thanks to the new module module introduced in the Python 3.4 version that makes the code simpler.
 Asyncio uses different constructions:
