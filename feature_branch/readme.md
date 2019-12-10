@@ -178,6 +178,227 @@ IMAGES_DIR = os.path.join(MEDIA_ROOT, 'images')
 
 if not os.path.exists(MEDIA_ROOT) or not os.path.exists(IMAGES_DIR):
     os.makedirs(IMAGES_DIR)
-    ```
+```
 
 Inside thumbnailer / views.py we import the django.views.View class and we will use it to create HomeView that contains the get and post methods
+
+```
+# image_parroter/image_parroter/thumbnailer/views.py
+
+import os
+
+from celery import current_app
+
+from django import forms
+from django.conf import settings
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.views import View
+
+from .tasks import make_thumbnails
+
+class FileUploadForm(forms.Form):
+    image_file = forms.ImageField(required=True)
+
+class HomeView(View):
+    def get(self, request):
+        form = FileUploadForm()
+        return render(request, 'thumbnailer/home.html', { 'form': form })
+
+    def post(self, request):
+        form = FileUploadForm(request.POST, request.FILES)
+        context = {}
+
+        if form.is_valid():
+            file_path = os.path.join(settings.IMAGES_DIR, request.FILES['image_file'].name)
+
+            with open(file_path, 'wb+') as fp:
+                for chunk in request.FILES['image_file']:
+                    fp.write(chunk)
+
+            task = make_thumbnails.delay(file_path, thumbnails=[(128, 128)])
+
+            context['task_id'] = task.id
+            context['task_status'] = task.status
+
+            return render(request, 'thumbnailer/home.html', context)
+
+        context['form'] = form
+
+        return render(request, 'thumbnailer/home.html', context)
+
+
+class TaskView(View):
+    def get(self, request, task_id):
+        task = current_app.AsyncResult(task_id)
+        response_data = {'task_status': task.status, 'task_id': task.id}
+
+        if task.status == 'SUCCESS':
+            response_data['results'] = task.get()
+
+        return JsonResponse(response_data)
+```
+
+Inside thumbernailer we will create the urls.py module
+
+```
+# image_parroter/image_parroter/thumbnailer/urls.py
+
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+  path('', views.HomeView.as_view(), name='home'),
+  path('task/<str:task_id>/', views.TaskView.as_view(), name='task'),
+]
+```
+
+In the urls.py module of image_parroter we will add the application level URLs
+
+```
+# image_parroter/image_parroter/urls.py
+
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('thumbnailer.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+We create a directory to store the unique template within the thumbnail directory
+
+```
+(venv) $ mkdir -p thumbnailer/templates/thumbnailer
+```
+
+Within this directory we will add home.html in which we will load the widget_tweaks tags and import bulma CSS and a library called Axios.js
+
+```
+<!-- image_parroter/image_parroter/thumbnailer/templates/thumbnailer/home.html -->
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Thumbnailer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        Thumbnailer
+      </a>
+    </div>
+  </nav>
+  <section class="hero is-primary is-fullheight-with-navbar">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title is-size-1 has-text-centered">Thumbnail Generator</h1>
+        <p class="subtitle has-text-centered" id="progress-title"></p>
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <form action="{% url 'home' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="file is-large has-name">
+                <label class="file-label">
+                  {{ form.image_file|add_class:"file-input" }}
+                  <span class="file-cta">
+                    <span class="file-icon"><i class="fas fa-upload"></i></span>
+                    <span class="file-label">Browse image</span>
+                  </span>
+                  <span id="file-name" class="file-name"
+                    style="background-color: white; color: black; min-width: 450px;">
+                  </span>
+                </label>
+                <input class="button is-link is-large" type="submit" value="Submit">
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+  var file = document.getElementById('{{form.image_file.id_for_label}}');
+  file.onchange = function() {
+    if(file.files.length > 0) {
+      document.getElementById('file-name').innerHTML = file.files[0].name;
+    }
+  };
+  </script>
+
+  {% if task_id %}
+  <script>
+  var taskUrl = "{% url 'task' task_id=task_id %}";
+  var dots = 1;
+  var progressTitle = document.getElementById('progress-title');
+  updateProgressTitle();
+  var timer = setInterval(function() {
+    updateProgressTitle();
+    axios.get(taskUrl)
+      .then(function(response){
+        var taskStatus = response.data.task_status
+        if (taskStatus === 'SUCCESS') {
+          clearTimer('Check downloads for results');
+          var url = window.location.protocol + '//' + window.location.host + response.data.results.archive_path;
+          var a = document.createElement("a");
+          a.target = '_BLANK';
+          document.body.appendChild(a);
+          a.style = "display: none";
+          a.href = url;
+          a.download = 'results.zip';
+          a.click();
+          document.body.removeChild(a);
+        } else if (taskStatus === 'FAILURE') {
+          clearTimer('An error occurred');
+        }
+      })
+      .catch(function(err){
+        console.log('err', err);
+        clearTimer('An error occurred');
+      });
+  }, 800);
+
+  function updateProgressTitle() {
+    dots++;
+    if (dots > 3) {
+      dots = 1;
+    }
+    progressTitle.innerHTML = 'processing images ';
+    for (var i = 0; i < dots; i++) {
+      progressTitle.innerHTML += '.';
+    }
+  }
+  function clearTimer(message) {
+    clearInterval(timer);
+    progressTitle.innerHTML = message;
+  }
+  </script>
+  {% endif %}
+</body>
+</html>
+```
+
+At this point, I can open another terminal, once again with the Python virtual environment active, and start the Django development server.
+
+![Redis4 img](https://raw.githubusercontent.com/manuelorozcotoro/Computo-Distribuido/feature_branch/feature_branch/images/4.png)
+
+Once this is done we enter the address of our server.
+
+![Redis5 img](https://raw.githubusercontent.com/manuelorozcotoro/Computo-Distribuido/feature_branch/feature_branch/images/5.png)
+
+We add an image of our pc and it generates a .zip file as a result where it contains our original image and the thumbnail.
+
+![Redis6 img](https://raw.githubusercontent.com/manuelorozcotoro/Computo-Distribuido/feature_branch/feature_branch/images/6.png)
