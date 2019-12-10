@@ -259,5 +259,6 @@ Synchronous version: Judit plays one game at a time, never two at the same time,
 
 Asynchronous version: Judit moves from one table to another, making a move on each table. She leaves the table and lets the opponent make his next move during the waiting time. A move in the 24 games takes Judit 24 * 5 == 120 seconds, or 2 minutes. All exposure is now reduced to 120 * 30 == 3600 seconds, or only 1 hour.
 
+<a name="item11"></a>
 **2.1.3 Async IO is not easy**
 Using Async IO is not easy, so you have to understand your key concepts with which you work, although it has evolved in terms of its API, so it is very useful
