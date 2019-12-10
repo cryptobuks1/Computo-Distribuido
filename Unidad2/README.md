@@ -27,6 +27,7 @@ Additionally, the multiprocessing library can be used in which it supports gener
 
 Example:
 
+```
 from multiprocessing import Process
   #Import the process library of the multiprocessing package.
   #The multiprocessing package supports generation processes offering local concurrency
@@ -60,6 +61,7 @@ if __name__ == "__main__":  #confirms that the code is under main function
     # complete the processes
     for proc in procs:
         proc.join()
+```
 
 <a name="item3"></a>
 
@@ -67,6 +69,7 @@ if __name__ == "__main__":  #confirms that the code is under main function
 One way to execute several things at once is to use threads in this way multiple tasks are executed.
 Here is an example of how this type of programming works in python:
 
+```
   "" "A python library is imported here that allows you to perform
   multiprocesses using threads "" "
 import threading
@@ -105,7 +108,7 @@ if __name__ == "__main__":
 
     # both threads completely executed
     print("Done!")
-
+```
 
 <a name="item4"></a>
 
@@ -113,6 +116,7 @@ if __name__ == "__main__":
 Corutins are generalizations of subroutines. They are used for cooperative multitasking where a process voluntarily yields (gives away) control periodically or when it is inactive to allow multiple applications to run simultaneously. Corutins are similar to generators but with few additional methods and a slight change in the way we use the declaration of performance. Generators produce data for iteration, while corutins can also consume data.
 Courutinas Code
 
+```
 def print_name (prefix): # create the print_name function with the prefix parameter
 print ("Searching prefix: {}". format (prefix)) # The parameter is converted.
     
@@ -130,6 +134,7 @@ corou .__ next __ () #with next we send parameters through yield to the function
 corou.send ("James")
 corou.send ("Dear James")
 corou.close () # we finally close the courutina.
+```
 
 <a name="item5"></a>
 
