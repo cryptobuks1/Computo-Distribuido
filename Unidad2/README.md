@@ -6,14 +6,20 @@
 * [1.1.-Multiple Processes](#item2)
 * [1.2.-Multiple threads](#item3)
 * [1.3 performance corutins](#item4)
-* [1.2.-Multiple threads](#item3)
-* [1.2.-Multiple threads](#item3)
-* [1.2.-Multiple threads](#item3)
-* [1.2.-Multiple threads](#item3)
+* [1.4 Asynchronous programming](#item5)
+* [1.5 Use of Redis and Redis Queue RQ](#item6)
+* [2.— Async IO en Python](#item7)
+* [2.1 The 10,000-foot view of Async IO](#item8)
+* [2.1.1 Where does Async IO fit in?](#item9)
+* [2.1.2 Async IO explained](#item10)
+* [2.1.3 Async IO is not easy](#item11)
+* [2.1 The 10,000-foot view of Async IO](#item8)
+* [2.1 The 10,000-foot view of Async IO](#item8)
+* [2.1 The 10,000-foot view of Async IO](#item8)
+* [2.1 The 10,000-foot view of Async IO](#item8)
 
 
 <a name="item1"></a>
-
 
 **1.-Introduction to asynchronous programming in python.**
 Asynchronous programming gives us the ability to "defer" the execution of a function while waiting for an operation to be completed, usually I / O (network, hard disk, ...), and thus avoid blocking the execution until it has been completed. completed the task in question This is possible because the functions are first-class citizens and can be passed as arguments of other functions as we would with the variables.
@@ -145,6 +151,7 @@ Asyncio uses different constructions:
 * Routines: Release the control flow back to the event loop.
 * Futures: It is the result of a task that may or may not have been executed.
 
+```
 import signal  
 import sys  
 import asyncio  
@@ -182,3 +189,75 @@ asyncio.ensure_future(get_reddit_top('python', client))
 asyncio.ensure_future(get_reddit_top('programming', client))  
 asyncio.ensure_future(get_reddit_top('compsci', client))  
 loop.run_forever()  
+```
+
+<a name="item6"></a>
+
+**1.5 Use of Redis and Redis Queue RQ**
+The use of asyncio and aiohttp may not always be an option, especially if you are using earlier versions of python. In addition, there will be scenarios in which you would like to distribute your tasks on different servers. In that case, we can take advantage of RQ (Redis Queue). It is a simple Python library to queue jobs and process them in the background with workers. It is backed by Redis, a key / value data store.
+Example:
+
+Creation of our mymodule.py module
+
+```
+import requests
+"" "
+Method to import the functions of async and Queue to make queries to predefined urls
+through a function we return the request.
+"" "
+def count_words_at_url(url):
+	"""Just an example function that's called async."""
+	resp = requests.get(url)
+
+	print( len(resp.text.split()))
+	return( len(resp.text.split()))
+```
+
+Creation of our method to implement redis
+
+```
+from mymodule import count_words_at_url  #Import our module created in another file
+from redis import Redis  # We import the redis module from the redis library.
+from rq import Queue #Import from RQ previously installed the Queue module.
+
+
+q = Queue(connection=Redis()) # We create the connection
+job = q.enqueue(count_words_at_url, 'http://nvie.com') # and we make the query to the url
+```
+
+<a name="item7"></a>
+
+**2.— Async IO en Python**
+Async IO is a concurrent programming design that has received dedicated support in Python, it was introduced since version 3.4
+
+<a name="item8"></a>
+
+**2.1 The 10,000-foot view of Async IO**
+Async IO is less known than multiprocessing and threading, but to better understand this issue we can start with:
+
+<a name="item9"></a>
+
+**2.1.1 Where does Async IO fit in?**
+To begin with, we must understand some concepts such as parallelism, which consists of performing multiple operations at the same time. Multiprocessing is a means to achieve parallelism and involves the distribution of tasks over the central processing units (CPUs or cores) of a computer.
+
+The concurrence suggests that multiple tasks have the ability to execute in an overlapping manner. Threading is a concurrent execution model in which multiple threads take turns executing tasks.
+Async IO is a single process and single thread design: it uses cooperative multitasking
+
+<a name="item10"></a>
+
+**2.1.2 Async IO explained**
+A very easy way to better understand this topic may be this example:
+Chess teacher Judit Polgár presents a chess exhibition in which she plays with multiple amateur players. She has two ways of carrying out the exhibition: synchronous and asynchronous.
+
+Assumptions
+
+24 opponents
+Judit makes each chess move in 5 seconds
+Each opponent takes 55 seconds to make a move.
+The games average 30 pair movements (60 movements in total)
+Synchronous version: Judit plays one game at a time, never two at the same time, until the game is completed. Each game lasts (55 + 5) * 30 == 1800 seconds, or 30 minutes. All exposure lasts 24 * 30 == 720 minutes, or 12 hours.
+
+Asynchronous version: Judit moves from one table to another, making a move on each table. She leaves the table and lets the opponent make his next move during the waiting time. A move in the 24 games takes Judit 24 * 5 == 120 seconds, or 2 minutes. All exposure is now reduced to 120 * 30 == 3600 seconds, or only 1 hour.
+
+**2.1.3 Async IO is not easy**
+Using Async IO is not easy, so you have to understand your key concepts with which you work, although it has evolved in terms of its API, so it is very useful
