@@ -72,3 +72,112 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 ```
+
+Subsequently we must ensure that the celery module that we just created is injected directly into our Django application when it is executed, this is done by the app within the initial configuration of our Django project and explicitly registering it as a namespace symbol inside the Django package “image_parroter”.
+
+```
+# image_parroter/image_parroter/__init__.py
+
+from .celery import celery_app
+
+__all__ = ('celery_app',)
+```
+
+We add a new module called tasks.py inside the "thumbnailer" application. Inside the tasks.py module I import the shared function decorator and is used to define a celery task function called adding_task.
+
+```
+from celery import shared_task
+@shared_task
+def adding_task(x, y):
+    return x + y
+```
+
+Finally, I need to add the thumbnail application to the INSTALLED_APPS list in the settings.py module of the image_parroter project.
+
+```
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'thumbnailer.apps.ThumbnailerConfig',
+    'widget_tweaks',
+]
+```
+
+Now as the redis server is running, the celery program started in a second terminal.
+
+![Redis3 img](https://raw.githubusercontent.com/manuelorozcotoro/Computo-Distribuido/feature_branch/feature_branch/images/3.png)
+
+In the third and final terminal, again with the Python virtual environment active, I can start the Django Python shell and try my adding_task.
+
+```
+(venv) $ python manage.py shell
+Python 3.6.6 |Anaconda, Inc.| (default, Jun 28 2018, 11:07:29)
+>>> from thumbnailer.tasks import adding_task
+>>> task = adding_task.delay(2, 5)
+>>> print(f"id={task.id}, state={task.state}, status={task.status}")
+id=86167f65-1256-497e-b5d9-0819f24e95bc, state=SUCCESS, status=SUCCESS
+>>> task.get()
+7
+```
+
+## Create thumbnails of images within a celery task
+
+Back in the tasks.py module, I import the Image class from the PIL package, then added a new task called make_thumbnails, which accepts an image file path and a list of width and height dimensions of 2 tuples to create thumbnails
+
+```
+import os
+from zipfile import ZipFile
+
+from celery import shared_task
+from PIL import Image
+
+from django.conf import settings
+
+@shared_task
+def make_thumbnails(file_path, thumbnails=[]):
+    os.chdir(settings.IMAGES_DIR)
+    path, file = os.path.split(file_path)
+    file_name, ext = os.path.splitext(file)
+
+    zip_file = f"{file_name}.zip"
+    results = {'archive_path': f"{settings.MEDIA_URL}images/{zip_file}"}
+    try:
+        img = Image.open(file_path)
+        zipper = ZipFile(zip_file, 'w')
+        zipper.write(file)
+        os.remove(file_path)
+        for w, h in thumbnails:
+            img_copy = img.copy()
+            img_copy.thumbnail((w, h))
+            thumbnail_file = f'{file_name}_{w}x{h}.{ext}'
+            img_copy.save(thumbnail_file)
+            zipper.write(thumbnail_file)
+            os.remove(thumbnail_file)
+
+        img.close()
+        zipper.close()
+    except IOError as e:
+        print(e)
+
+    return results
+```
+
+With the celery task defined, he went on to build Django views to serve a template with a file upload form.
+To begin, I give the Django project a MEDIA_ROOT location where image files and zip files can reside (I used it in the previous example task), as well as specify MEDIA_URL where the content can be served.
+
+```
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'media'))
+IMAGES_DIR = os.path.join(MEDIA_ROOT, 'images')
+
+if not os.path.exists(MEDIA_ROOT) or not os.path.exists(IMAGES_DIR):
+    os.makedirs(IMAGES_DIR)
+    ```
+
+Inside thumbnailer / views.py we import the django.views.View class and we will use it to create HomeView that contains the get and post methods
