@@ -5,7 +5,7 @@ Requirements
 - Internet connection to download the requirements
 
 ## Developing
-![Imagen1](https://raw.githubusercontent.com/manuelorozcotoro/Computo-Distribuido/Unidad4/Unidad4/images/tete.png)
+![Imagen1](https://raw.githubusercontent.com/manuelorozcotoro/Computo-Distribuido/Unidad4/Unidad4/Proyecto/images/tete.png)
 Creation of our dockerFile file
 We create a file at the root of our project called dockerfile with the following parameters.
 
@@ -92,4 +92,4 @@ Once you have built our container we can execute it using the following command.
 
 `sudo docker-compose up`
 
-![Imagen1](https://raw.githubusercontent.com/manuelorozcotoro/Computo-Distribuido/Unidad4/Unidad4/images/3.png)
+![Imagen1](https://raw.githubusercontent.com/manuelorozcotoro/Computo-Distribuido/Unidad4/Unidad4/Proyecto/images/3.png)
